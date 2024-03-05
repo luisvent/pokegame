@@ -13,13 +13,13 @@ const loadAudio = (src) => {
 }
 
 const init = () => {
-  score = loadAudio('@/assets/sounds/fx/score2.ogg');
-  lose = loadAudio('@/assets/sounds/fx/game_over.ogg');
-  wrong = loadAudio('@/assets/sounds/fx/lose.ogg');
-  click = loadAudio('@/assets/sounds/fx/click.ogg');
-  win = loadAudio('@/assets/sounds/fx/win.ogg');
-  intro = loadAudio('../assets/sounds/music/Fallarbor_Town.mp3');
-  matchgame = loadAudio('@/assets/sounds/music/pikachu_beach.ogg');
+  score = loadAudio('/sounds/fx/score2.ogg');
+  lose = loadAudio('/sounds/fx/game_over.ogg');
+  wrong = loadAudio('/sounds/fx/lose.ogg');
+  click = loadAudio('/sounds/fx/click.ogg');
+  win = loadAudio('/sounds/fx/win.ogg');
+  intro = loadAudio('/sounds/music/Fallarbor_Town.mp3');
+  matchgame = loadAudio('/sounds/music/pikachu_beach.ogg');
 }
 
 const playScore = async () => {

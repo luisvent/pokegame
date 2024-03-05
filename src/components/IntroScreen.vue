@@ -58,12 +58,12 @@ const selectGame = (game) => {
       Select a game to PLAY!
     </div>
     <div class="flex my-20 relative col-span-2 justify-center items-center">
-      <img class="h-[100px] absolute right-8 -top-[80px]" src="/src/assets/images/effects/pika_idle.gif" />
+      <img class="h-[100px] absolute right-8 -top-[80px]" src="/images/effects/pika_idle.gif" />
       <div @click="selectGame(game)" class=" hover:scale-110 transition relative cursor-pointer size-52 text-red-600 text-5xl bg-amber-100 m-4 shadow-retro border-8 border-red-400"  v-for="game of games">
 
         <template v-if="game.enable"><span class="m-[40px]">{{game.name}}</span>
-          <img class="h-[100px] absolute right-0 bottom-[0px] " src="/src/assets/images/bg/poke/poke_bg_8.png" />
-          <img class="h-[130px] absolute right-[-15px] bottom-[10px]" src="/src/assets/images/effects/amooguss.gif" />
+          <img class="h-[100px] absolute right-0 bottom-[0px] " src="/images/bg/poke/poke_bg_8.png" />
+          <img class="h-[130px] absolute right-[-15px] bottom-[10px]" src="/images/effects/amooguss.gif" />
         </template>
         <div class="text-center text-black text-4xl mt-[55px]" v-else>
           {{game.name}}
@@ -90,7 +90,7 @@ const selectGame = (game) => {
     <span class="my-3.5" >CREATED BY</span>
     <div class="text-amber-400 flex gap-4 justify-center items-center text-3xl">
       <span>Luis Ventura</span>
-      <a class="hover:scale-125 transition" href="https://linkedin.com/in/luisvent"><img class="h-[30px]" src="/src/assets/images/icons/linkedin.png" /></a>
+      <a class="hover:scale-125 transition" href="https://linkedin.com/in/luisvent"><img class="h-[30px]" src="/images/icons/linkedin.png" /></a>
     </div>
   </div>
 

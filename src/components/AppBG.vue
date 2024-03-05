@@ -16,7 +16,7 @@ const initClouds = () => {
   clouds.value = [];
   for(let i =0; i < cloudsCount; i++) {
     clouds.value.push({
-      cloud: '@/assets/images/bg/clouds/cloud_' + utils.getRandomNumber(1, 8) + '.png',
+      cloud: '/images/bg/clouds/cloud_' + utils.getRandomNumber(1, 8) + '.png',
       x: utils.getRandomNumber(-10, 100),
       y: utils.getRandomNumber(0, 60),
       animation: 'cloud-animation-' + utils.getRandomNumber(1, 4)
@@ -59,8 +59,8 @@ init();
   </template>
 
   <template v-if="screen === 'matchgame'">
-  <img style="transform: rotateY(180deg);" class="absolute run-animation bottom-2.5 right-0 w-28" src="/src/assets/images/effects/pika_run.gif" />
-  <img style="transform: rotateY(180deg);" class="absolute bottom-28 left-10 w-20" src="/src/assets/images/effects/bulba_jump.gif" />
+  <img style="transform: rotateY(180deg);" class="absolute run-animation bottom-2.5 right-0 w-28" src="/images/effects/pika_run.gif" />
+  <img style="transform: rotateY(180deg);" class="absolute bottom-28 left-10 w-20" src="/images/effects/bulba_jump.gif" />
 
 </template>
 </template>

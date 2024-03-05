@@ -5,27 +5,27 @@
 @layer base {
     @font-face {
         font-family: Base;
-        src: url('fonts/NeuePixel-Regular.woff') format("woff2");
+        src: url('../../fonts/NeuePixel-Regular.woff') format("woff2");
     }
 
     @font-face {
         font-family: Base Round;
-        src: url('fonts/NeuePixel-Round-2.woff') format("woff2");
+        src: url('../../fonts/NeuePixel-Round-2.woff') format("woff2");
     }
 
     @font-face {
         font-family: Base Ultra Round;
-        src: url('fonts/NeuePixel-UltraRound.woff') format("woff2");
+        src: url('../../fonts/NeuePixel-UltraRound.woff') format("woff2");
     }
 
     @font-face {
         font-family: TN;
-        src: url('fonts/TN_Medium.woff2') format("woff2");
+        src: url('../../fonts/TN_Medium.woff2') format("woff2");
     }
 
     @font-face {
         font-family: Ark;
-        src: url('fonts/ark.woff2') format("woff2");
+        src: url('../../fonts/ark.woff2') format("woff2");
     }
 
     html {

@@ -154,7 +154,7 @@ const shootFireworks = () => {
 
   for(let i =0; i < fwCount; i++) {
     fireworks.value.push({
-      src: `/src/assets/images/effects/fw.gif`,
+      src: `/images/effects/fw.gif`,
       x: utils.getRandomNumber(0, 100),
       y: utils.getRandomNumber(0, 20),
     })
@@ -485,7 +485,7 @@ interact('.dropzone').dropzone({
           {{timer}}s
         </div>
 
-        <img v-if="timer === 0" class="animate-bounce h-[50px]" :src="'src/assets/images/icons/arrow.png'" />
+        <img v-if="timer === 0" class="animate-bounce h-[50px]" :src="'/images/icons/arrow.png'" />
       </div>
 
       <div class="flex justify-evenly w-full mt-10 flex-wrap">
