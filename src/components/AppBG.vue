@@ -16,7 +16,7 @@ const initClouds = () => {
   clouds.value = [];
   for(let i =0; i < cloudsCount; i++) {
     clouds.value.push({
-      cloud: '/src/assets/images/bg/clouds/cloud_' + utils.getRandomNumber(1, 8) + '.png',
+      cloud: '@/assets/images/bg/clouds/cloud_' + utils.getRandomNumber(1, 8) + '.png',
       x: utils.getRandomNumber(-10, 100),
       y: utils.getRandomNumber(0, 60),
       animation: 'cloud-animation-' + utils.getRandomNumber(1, 4)
