@@ -20,7 +20,8 @@ const difficulties = {
     rangeMax: 500,
     hidename: false,
     scoreMultiplier: 1,
-    timer: null
+    timer: null,
+    replaceWords: null
   },
   medium: {
     tries: 2,
@@ -31,7 +32,8 @@ const difficulties = {
     rangeMax: 700,
     hidename: false,
     scoreMultiplier: 2,
-    timer: null
+    timer: null,
+    replaceWords: null
   },
   hard: {
     tries: 2,
@@ -53,7 +55,8 @@ const difficulties = {
     rangeMax: 1025,
     hidename: true,
     scoreMultiplier: 5,
-    timer: 60
+    timer: 60,
+    replaceWords: 'min'
   },
   extrahard: {
     tries: 1,
@@ -64,7 +67,8 @@ const difficulties = {
     rangeMax: 1025,
     hidename: true,
     scoreMultiplier: 10,
-    timer: 30
+    timer: 30,
+    replaceWords: null
   }
 }
 const pokemons = ref([]);
@@ -308,7 +312,7 @@ const init = () => {
         id: newPokemonId,
         shadow: 'shadow-' + utils.getRandomNumber(1, 9),
         delay: delayAnimations[utils.getRandomNumber(0, 8)],
-        name: getDifficulty().hidename? utils.replaceRandomStringChar(pokemonData[newPokemonId - 1].name, '_') : pokemonData[newPokemonId - 1].name,
+        name: getDifficulty().hidename? utils.replaceRandomStringChar(pokemonData[newPokemonId - 1].name, '_', getDifficulty().replaceWords ) : pokemonData[newPokemonId - 1].name,
         matched: false
       });
     }
@@ -332,7 +336,7 @@ const init = () => {
 }
 
 init();
-mixer.playMatchGame();
+// mixer.playMatchGame();
 // region drag and drop
 
 interact('.draggable').draggable({

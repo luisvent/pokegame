@@ -44,9 +44,10 @@ if(!showWelcome) {
   start();
 }
 const selectGame = (game) => {
-  mixer.stopIntroMusic();
-
-  emit('gameSelected', game);
+  if(game.enabled ){
+    mixer.stopIntroMusic();
+    emit('gameSelected', game);
+  }
 }
 
 </script>

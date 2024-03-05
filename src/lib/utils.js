@@ -24,8 +24,14 @@ const shuffleArray = (array) => {
   return array;
 };
 
-const replaceRandomStringChar = (text, replace) => {
-  return text.split("").map(char => Math.random() > 0.5 ? replace : char).join("");
+const replaceRandomStringChar = (text, replace, r) => {
+
+  const replacements = {
+    min: 0.7,
+    max: 0.4
+  }
+
+  return text.split("").map(char => Math.random() > (r? (replacements[r]) : 0.5) ? replace : char).join("");
 }
 
 export default { getRandomNumber, shuffleArray, replaceRandomStringChar }
