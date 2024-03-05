@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: Base;
+        src: url('fonts/NeuePixel-Regular.woff') format("woff2");
+    }
+
+    @font-face {
+        font-family: Base Round;
+        src: url('fonts/NeuePixel-Round-2.woff') format("woff2");
+    }
+
+    @font-face {
+        font-family: Base Ultra Round;
+        src: url('fonts/NeuePixel-UltraRound.woff') format("woff2");
+    }
+
+    @font-face {
+        font-family: TN;
+        src: url('fonts/TN_Medium.woff2') format("woff2");
+    }
+
+    @font-face {
+        font-family: Ark;
+        src: url('fonts/ark.woff2') format("woff2");
+    }
+
+    html {
+        font-family: "Ark", "Geeza Pro";
+    }
+}
+
+/*.app-title {*/
+/*    @apply text-8xl font-bold font-uround text-shadow-retro;*/
+/*    text-shadow: 2px 4px gray;*/
+/*}*/
+
+.text-shadow-retro {
+    text-shadow: 4px 4px gray;
+}
+.text-shadow-small {
+    text-shadow: 2px 2px #858585;
+}
+
+.img-shadow-retro {
+    filter: drop-shadow(4px 2px 0px black);
+}
+
+.img-shadow-retro.shadow-1 {
+    filter: drop-shadow(4px 2px 0px greenyellow);
+}
+
+.img-shadow-retro.shadow-2 {
+    filter: drop-shadow(4px 2px 0px crimson);
+}
+
+.img-shadow-retro.shadow-3 {
+    filter: drop-shadow(4px 2px 0px deepskyblue);
+}
+
+.img-shadow-retro.shadow-4 {
+    filter: drop-shadow(4px 2px 0px forestgreen);
+}
+
+.img-shadow-retro.shadow-5 {
+    filter: drop-shadow(4px 2px 0px yellow);
+}
+
+.img-shadow-retro.shadow-6 {
+    filter: drop-shadow(4px 2px 0px rosybrown);
+}
+
+.img-shadow-retro.shadow-7 {
+    filter: drop-shadow(4px 2px 0px brown);
+}
+
+.img-shadow-retro.shadow-8 {
+    filter: drop-shadow(4px 2px 0px mediumslateblue);
+}
+
+.img-shadow-retro.shadow-9 {
+    filter: drop-shadow(4px 2px 0px coral);
+}
+
+.run-animation {
+    animation-name: run-screen;
+    animation-duration: 40s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.cloud-animation-1 {
+    animation-name: run-screen;
+    animation-duration: 160s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.cloud-animation-2 {
+    animation-name: run-screen;
+    animation-duration: 120s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.cloud-animation-3 {
+    animation-name: run-screen;
+    animation-duration: 90s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in;
+}
+
+.cloud-animation-4 {
+    animation-name: run-screen;
+    animation-duration: 100s;
+    animation-iteration-count: infinite;
+    animation-timing-function: step-start;
+}
+
+@keyframes run-screen{
+    100% {
+        right: 100%;
+    }
+}
+
+@keyframes cloud{
+    0%{
+        opacity: 0;
+    }
+    5% {
+        opacity: 1;
+    }
+    90%{
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.3;
+        right: 100%;
+    }
+}
