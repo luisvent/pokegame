@@ -10,7 +10,7 @@ const triggerClick = () => {
 </script>
 
 <template>
-  <button @click="triggerClick()" ><img v-if="icon" class="h-[18px]" :src="`src/assets/images/icons/${icon}.png`" /> {{ text }}</button>
+  <button @click="triggerClick()" ><img v-if="icon" class="h-[18px]" :src="`/images/icons/${icon}.png`" /> {{ text }}</button>
 </template>
 
 <style>
