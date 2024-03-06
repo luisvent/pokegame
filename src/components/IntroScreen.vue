@@ -13,14 +13,12 @@ const games = [
     enable: true
   },
   {
-    name: 'Coming Soon',
-    enable: false
+    key: 'identifygame',
+    name: 'Identify Pokemon',
+    enable: true
   },
   {
-    name: 'Coming Soon',
-    enable: false
-  },
-  {
+    key: 'versusgame',
     name: 'Coming Soon',
     enable: false
   }
@@ -44,7 +42,7 @@ if(!showWelcome) {
   start();
 }
 const selectGame = (game) => {
-  if(game.enabled ){
+  if(game.enable){
     mixer.stopIntroMusic();
     emit('gameSelected', game);
   }
@@ -60,27 +58,44 @@ const selectGame = (game) => {
     </div>
     <div class="flex my-20 relative col-span-2 justify-center items-center">
       <img class="h-[100px] absolute right-8 -top-[80px]" src="/images/effects/pika_idle.gif" />
-      <div @click="selectGame(game)" class=" hover:scale-110 transition relative cursor-pointer size-52 text-red-600 text-5xl bg-amber-100 m-4 shadow-retro border-8 border-red-400"  v-for="game of games">
+      <div @click="selectGame(game)" :class="game.enable? 'border-red-400 hover:scale-110 cursor-pointer shadow-retro' : 'border-black'" class="transition relative size-52 text-red-600 text-5xl bg-amber-100 m-4 border-8"  v-for="game of games">
 
-        <template v-if="game.enable"><span class="m-[40px]">{{game.name}}</span>
+          <span v-if="game.enable" class="m-[40px] text-4xl">{{game.name}}</span>
+          <span v-else class="m-[40px] text-black">Coming Soon</span>
+
+
+
+        <template v-if="game.key === 'matchgame'" >
           <img class="h-[100px] absolute right-0 bottom-[0px] " src="/images/bg/poke/poke_bg_8.png" />
           <img class="h-[130px] absolute right-[-15px] bottom-[10px]" src="/images/effects/amooguss.gif" />
-        </template>
-        <div class="text-center text-black text-4xl mt-[55px]" v-else>
-          {{game.name}}
-        </div>
+          </template>
+
+          <template v-else-if="game.key === 'identifygame'" >
+          <img class="h-[100px] absolute right-0 bottom-[0px] " src="/images/bg/poke/poke_bg_4.png" />
+          <img class="animate-hithere h-[90px] w-[110px] absolute right-[0px] bottom-[10px]" src="/images/effects/pokedex2.png" />
+          </template>
+
+          <template v-else-if="game.key === 'versusgame'" >
+          <img class="h-[100px] absolute right-0 bottom-[0px] " src="/images/bg/poke/poke_bg_2.png" />
+          <img class="animate-shake h-[90px] absolute right-[0px] bottom-[5px]" src="/images/effects/vs.png" />
+          </template>
+
 
         </div>
     </div>
 
     <div class="text-4xl flex flex-col justify-center items-center text-shadow-small font-round text-red-500">
       <span class="my-3.5" >CREDITS</span>
-      <div class="text-amber-400 flex gap-4 justify-center items-center text-2xl">
+      <div class="text-amber-400 flex gap-4 flex-wrap justify-center items-center text-2xl">
         <span>Giphy</span>
         <span>DevianArt</span>
         <span>Flaticon</span>
         <span>Zapsplat</span>
         <span>Pixabay</span>
+        <span>Gifer</span>
+        <span>Dribble</span>
+        <span>Fintaman</span>
+        <span>rare-gallery</span>
       </div>
     </div>
 

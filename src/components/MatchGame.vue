@@ -289,7 +289,6 @@ const init = () => {
   if(loser.value) {
     userScore.value = 0;
 
-
     if(campaign.value) {
       triesAvailable.value = 0;
       clearCampaign();
@@ -336,7 +335,7 @@ const init = () => {
 }
 
 init();
-// mixer.playMatchGame();
+mixer.playMatchGame();
 // region drag and drop
 
 interact('.draggable').draggable({

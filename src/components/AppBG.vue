@@ -2,47 +2,70 @@
 import { ref } from 'vue'
 import utils from '@/lib/utils.js'
 
-const {screen, enableClouds} = defineProps(['screen', 'enableClouds']);
-const bgsClass = ['bg-bg1-clear', 'bg-bg2-clear', 'bg-bg3-clear'];
-const cloudsCount = 16;
-const clouds = ref([]);
+const {screen, enableParticles} = defineProps(['screen', 'enableParticles']);
+const bgsClass = ['bg-bg1-clear', 'bg-bg2-clear', 'bg-bg3-clear', 'bg-bg5', 'bg-bg6', 'bg-bg7'];
+const particlesCount = 16;
+const bgInterval = ref(null);
+const particles = ref([]);
 let bgClass= ref('bg-bg4-clear');
+
+const initFloatingParticles = (particleMame, min, max, format, _class) => {
+  particles.value = [];
+  for(let i =0; i < particlesCount; i++) {
+    particles.value.push({
+      src: `/images/bg/particles/${particleMame}_${utils.getRandomNumber(min, max)}.${format}`,
+      x: utils.getRandomNumber(-10, 100),
+      y: utils.getRandomNumber(0, 60),
+      class: 'cloud-animation-' + utils.getRandomNumber(1, 4) + ' ' + _class
+    })
+  }
+}
+
+const loopBG = (min, max) => {
+  bgClass.value = bgsClass[min];
+  bgInterval.value = setInterval(() => {
+    bgClass.value = bgsClass[utils.getRandomNumber(min, max)];
+  }, 5000);
+}
 
 const initIntro = () => {
 
 }
 
-const initClouds = () => {
-  clouds.value = [];
-  for(let i =0; i < cloudsCount; i++) {
-    clouds.value.push({
-      cloud: '/images/bg/clouds/cloud_' + utils.getRandomNumber(1, 8) + '.png',
-      x: utils.getRandomNumber(-10, 100),
-      y: utils.getRandomNumber(0, 60),
-      animation: 'cloud-animation-' + utils.getRandomNumber(1, 4)
-    })
-  }
+const initMatchGame = () => {
+  loopBG(0, 2);
 }
 
-const initMatchGame = () => {
-  setInterval(() => {
-    bgClass.value = bgsClass[(Math.floor(Math.random() * bgsClass.length))];
-  }, 5000);
-
+const initIdentifyGame = () => {
+  loopBG(3, 5);
 }
 
 const init = () => {
+  clearInterval((bgInterval.value));
+  bgInterval.value = null;
+
   switch (screen) {
     case 'intro':
       initIntro();
+
+      if(enableParticles) {
+        initFloatingParticles('cloud', 1, 8, 'png');
+      }
       break;
     case 'matchgame':
       initMatchGame();
-      break;
-  }
 
-  if(enableClouds) {
-    initClouds();
+      if(enableParticles) {
+        initFloatingParticles('cloud', 1, 8, 'png');
+      }
+      break;
+    case 'identifygame':
+      initIdentifyGame();
+
+      if(enableParticles) {
+        initFloatingParticles('fly', 1, 1, 'gif', 'h-[80px]');
+      }
+      break;
   }
 }
 
@@ -54,8 +77,12 @@ init();
   </div>
 <!--  <img class="absolute bottom-0" src="/src/assets/images/bicycle.gif" />-->
 
-  <template v-if="enableClouds" v-for="cloud of clouds">
-    <img class="absolute run-animation" :class="cloud.animation" :style="`right: ${cloud.x}%; top: ${cloud.y}%;`" :src="cloud.cloud" />
+  <template v-if="enableParticles" v-for="particle of particles">
+    <img class="absolute run-animation" :class="particle.class" :style="`right: ${particle.x}%; top: ${particle.y}%;`" :src="particle.src" />
+  </template>
+
+  <template v-if="screen === 'intro'">
+    <img style="transform: rotateY(180deg); filter: grayscale(0.2);" class="absolute bottom-20 left-20 w-50" src="/images/effects/blastoise.gif" />
   </template>
 
   <template v-if="screen === 'matchgame'">

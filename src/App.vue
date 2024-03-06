@@ -5,6 +5,7 @@ import MusicHanlder from '@/components/MusicHanlder.vue'
 import MatchGame from '@/components/MatchGame.vue'
 import IntroScreen from '@/components/IntroScreen.vue'
 import { ref } from 'vue'
+import IdentifyGame from '@/components/IdentifyGame.vue'
 
 const screen = ref('intro');
 const showWelcome = ref(true);
@@ -21,10 +22,10 @@ const loadTitleScreen = () => {
 </script>
 
 <template>
-  <AppBG :screen="screen" :key="screen" :enableClouds="true"></AppBG>
+  <AppBG :screen="screen" :key="screen" :enableParticles="true"></AppBG>
   <TitleHeader :screen="screen" ></TitleHeader>
 
-
+  <IdentifyGame @back="loadTitleScreen" v-if="screen === 'identifygame'" ></IdentifyGame>
   <IntroScreen v-if="screen === 'intro'" :showWelcome="showWelcome" @gameSelected="selectGame"></IntroScreen>
   <MatchGame @back="loadTitleScreen" v-else-if="screen === 'matchgame'" ></MatchGame>
 </template>
