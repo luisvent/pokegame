@@ -18,7 +18,7 @@ export default {
         'bg2': "url('/images/bg/bg2.png')",
         'bg3': "url('/images/bg/bg3.png')",
         'bg4': "url('/images/bg/bg4.jpeg')",
-        'bg5': "url('/images/bg/bg5.webp')",
+        'bg5': "url('/images/bg/bg5.png')",
         'bg6': "url('/images/bg/bg6.png')",
         'bg7': "url('/images/bg/bg7.png')",
         'bg8': "url('/images/bg/bg8.png')",
