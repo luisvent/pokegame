@@ -9,6 +9,9 @@ import pokemonData from '@/assets/data/pokemon_data.json'
 import interact from 'interactjs'
 import SimpleButton from '@/components/SimpleButton.vue'
 import SubTitle from '@/components/SubTitle.vue'
+import UIButton from '@/components/UIButton.vue'
+import ProgressInfo from '@/components/ProgressInfo.vue'
+import DifficultyUI from '@/components/DifficultyUI.vue'
 
 const difficulties = {
   easy: {
@@ -44,7 +47,7 @@ const difficulties = {
     rangeMax: 1025,
     hidename: false,
     scoreMultiplier: 3.5,
-    timer: null
+    timer: 120
   },
   veryhard: {
     tries: 1,
@@ -75,7 +78,7 @@ const pokemons = ref([]);
 const fireworks = ref([]);
 const winner = ref(false);
 const loser = ref(false);
-const difficulty = ref('easy');
+const difficulty = ref('hard');
 const shuffledPokemons = ref([]);
 const triesAvailable = ref(0);
 const userScore = ref(0);
@@ -406,53 +409,11 @@ interact('.dropzone').dropzone({
   <template v-for="fw of fireworks">
     <img class="absolute" :style="`right: ${fw.x}%; top: ${fw.y}%;`" :src="fw.src" />
   </template>
+  <UIButton @click="goTitleScreen()" class="absolute top-10 left-10":icon="'arrow_left'" :text="'Back'" ></UIButton>
 
-  <div class="absolute top-4 right-1.5 flex flex-col m-8">
-    <div :class="campaign? 'pointer-events-none' : ''" class="flex flex-col justify-center items-center gap-4">
-      <div  class="uppercase font-round text-amber-300 font-bold text-3xl mb-4 text-shadow-retro">
-        {{ campaign? 'difficulty' : 'change difficulty' }}
-      </div>
-      <div class="flex-col flex justify-center items-center gap-1">
-        <div @click="changeDifficulty('easy')" class="text-green-600 text-2xl cursor-pointer hover:shadow-retro" :class="difficulty === 'easy'? 'selected' : ''" >Easy</div>
-        <ProgressBar v-if="campaign" :steps="campaignSet['easy'].times" :completedSteps="campaignProgress['easy'].times" :key="campaignProgress['easy'].times" ></ProgressBar>
-      </div>
-      <div class="flex-col flex justify-center items-center gap-1">
-        <div @click="changeDifficulty('medium')" class="text-amber-300 text-2xl cursor-pointer hover:shadow-retro" :class="difficulty === 'medium'? 'selected' : ''" >Medium</div>
-        <ProgressBar v-if="campaign" :steps="campaignSet['medium'].times" :completedSteps="campaignProgress['medium'].times" :key="campaignProgress['medium'].times" ></ProgressBar>
-      </div>
-      <div class="flex-col flex justify-center items-center gap-1">
-       <div @click="changeDifficulty('hard')" class="text-red-500 text-2xl cursor-pointer hover:shadow-retro" :class="difficulty === 'hard'? 'selected' : ''" >Hard</div>
-        <ProgressBar v-if="campaign" :steps="campaignSet['hard'].times" :completedSteps="campaignProgress['hard'].times" :key="campaignProgress['hard'].times" ></ProgressBar>
-      </div>
-      <div class="flex-col flex justify-center items-center gap-1">
-      <div @click="changeDifficulty('veryhard')" class="text-red-800 text-2xl cursor-pointer hover:shadow-retro" :class="difficulty === 'veryhard'? 'selected' : ''" >Very Hard</div>
-        <ProgressBar v-if="campaign" :steps="campaignSet['veryhard'].times" :completedSteps="campaignProgress['veryhard'].times" :key="campaignProgress['veryhard'].times" ></ProgressBar>
-      </div>
-      <div class="flex-col flex justify-center items-center gap-1">
-      <div @click="changeDifficulty('extrahard')" class="text-black-800 text-2xl cursor-pointer hover:shadow-retro" :class="difficulty === 'extrahard'? 'selected' : ''" >Extra Hard</div>
-        <ProgressBar v-if="campaign" :steps="campaignSet['extrahard'].times" :completedSteps="campaignProgress['extrahard'].times" :key="campaignProgress['extrahard'].times" ></ProgressBar>
-      </div>
-    </div>
-  </div>
+  <DifficultyUI :difficulties="['easy', 'medium', 'hard', 'veryhard', 'extrahard']" :campaign-progress="campaignProgress" :campaign-set="campaignSet" :difficulty-selected="difficulty" :enable-switch-difficulty="!campaign" class="absolute top-4 right-1.5"></DifficultyUI>
 
-  <div class="absolute top-4 left-1.5 flex flex-col m-8">
-    <div class="flex flex-col justify-center items-center gap-4">
-      <div  class="uppercase font-round text-amber-300 font-bold text-3xl text-shadow-retro">
-        tries
-      </div>
-      <div class="text-red-500 text-4xl text-shadow-retro">
-        {{ triesAvailable }}
-      </div>
-      <template v-if="campaign">
-        <div class="uppercase font-round text-amber-300 font-bold text-3xl mt-10 text-shadow-retro">
-          score
-        </div>
-        <div class="text-red-500 text-6xl text-shadow-retro">
-          {{ userScore }}
-        </div>
-      </template>
-     </div>
-  </div>
+  <ProgressInfo class="absolute top-24 left-1.5" :triesAvailable="triesAvailable" :userScore="userScore" :showScore="campaign"></ProgressInfo>
 
   <div class="flex flex-col justify-center align-middle items-center">
 
@@ -521,16 +482,6 @@ interact('.dropzone').dropzone({
 
 .draggable {
   transition: all 250ms;
-}
-
-.selected {
-  background-color: #ef4444;
-  padding: 0px 10px;
-  color: white;
-}
-
-.selected::before {
-  content: '> ';
 }
 
 .draggable:hover {

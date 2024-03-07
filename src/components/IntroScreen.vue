@@ -2,6 +2,8 @@
 import mixer from '@/lib/mixer.js'
 import { ref } from 'vue'
 import SimpleButton from '@/components/SimpleButton.vue'
+import utils from '@/lib/utils.js'
+import api from '@/lib/api.js'
 
 mixer.init()
 const musicPlaying = ref(false)
@@ -48,6 +50,40 @@ const selectGame = (game) => {
   }
 }
 
+const test = async () => {
+
+  function clearPokemonData(pokemon) {
+    const pokemonCleared = ref({
+      name: '',
+      stats: {},
+      types: []
+    });
+
+    pokemonCleared.value.types = pokemon['types'].map(t => t.type.name);
+    pokemonCleared.value.name = pokemon.name;
+    pokemon['stats'].forEach(s => {
+      pokemonCleared.value.stats[s.stat.name] = s['base_stat']
+    })
+
+    return pokemonCleared.value;
+  }
+
+  const pokemon1Id = utils.getRandomNumber(1, 1025);
+  const pokemon2Id = utils.getRandomNumber(1, 1025);
+
+  const [pokemon1, pokemon2] = await Promise.all([
+    api.getPokemonInfo(pokemon1Id),
+    api.getPokemonInfo(pokemon2Id),
+  ]);
+
+  console.log(pokemon1.name, clearPokemonData(pokemon1))
+  console.log(pokemon2.name, clearPokemonData(pokemon2))
+
+  console.log(utils.vs2(clearPokemonData(pokemon1), clearPokemonData(pokemon2)))
+  console.log(utils.vs2(clearPokemonData(pokemon2), clearPokemonData(pokemon1)))
+}
+
+test();
 </script>
 
 <template>
