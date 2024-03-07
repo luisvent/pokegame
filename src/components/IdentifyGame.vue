@@ -40,18 +40,18 @@ const campaignSet = {
   },
   hard: {
     times: 4,
-    tries: 2,
+    tries: 1,
     next: 'veryhard'
   },
   veryhard: {
     times: 5,
-    tries: 3,
+    tries: 1,
     next: 'extrahard'
   },
   extrahard: {
     times: 6,
-    tries: 2,
-    next: 'easy'
+    tries: 1,
+    next: 'finish'
   },
 };
 const campaignProgress = ref({
@@ -90,7 +90,7 @@ const difficulties = {
     matches: [],
     hideClass: '',
     rangeMin: 1,
-    rangeMax: 1025,
+    rangeMax: 1008,
     hidename: false,
     scoreMultiplier: 1,
     timer: null,
@@ -109,7 +109,7 @@ const difficulties = {
     matches: ['shape'],
     hideClass: 'hide-gray',
     rangeMin: 1,
-    rangeMax: 1025,
+    rangeMax: 1008,
     hidename: false,
     scoreMultiplier: 2,
     timer: null,
@@ -128,7 +128,7 @@ const difficulties = {
     matches: ['shape', 'color'],
     hideClass: 'hide-dark',
     rangeMin: 1,
-    rangeMax: 1025,
+    rangeMax: 1008,
     hidename: false,
     scoreMultiplier: 3.5,
     timer: null,
@@ -147,7 +147,7 @@ const difficulties = {
     matches: ['shape', 'color', 'type'],
     hideClass: 'hide-dark',
     rangeMin: 1,
-    rangeMax: 1025,
+    rangeMax: 1008,
     hidename: true,
     scoreMultiplier: 5,
     timer: null,
@@ -166,7 +166,7 @@ const difficulties = {
     matches: ['shape', 'color', 'type', 'habitat'],
     hideClass: 'hide-extradark',
     rangeMin: 800,
-    rangeMax: 1025,
+    rangeMax: 1008,
     hidename: true,
     scoreMultiplier: 10,
     timer: 30,
@@ -200,6 +200,7 @@ const getPokemons = async () => {
         id: pokemon.id,
         shadow: 'shadow-' + utils.getRandomNumber(1, 9),
         name: pokemon.name,
+        tried: false
       });
     }
   } while (pokemons.value.length < getDifficulty().pokemons)
@@ -207,12 +208,19 @@ const getPokemons = async () => {
 
 const nextCampaign = () => {
   if(campaignProgress.value[difficulty.value].times >= campaignSet[difficulty.value].times) {
+
+    if(campaignSet[difficulty.value].next === 'finish') {
+      clearProgress();
+    } else{
     difficulty.value = campaignSet[difficulty.value].next;
+    }
   }
 }
 
 const clearProgress = () => {
   difficulty.value = 'easy';
+  userScore.value = 0;
+  triesAvailable.value = 0;
   campaignProgress.value = {
     easy: {
       times: 0,
@@ -267,8 +275,8 @@ const getPokemonDescription = async () => {
 
 
   descriptions.value['es'] =  {
-    default: descriptions.value['es'].length > 0? descriptions.value['es'][descriptions.value['es'].length - 1].flavor_text.replace(pokemonData.name, 'This pokemon').replace(pokemonData.name.toUpperCase(), 'This pokemon').replace(utils.titlecase(pokemonData.name), 'This pokemon')  : 'No description available for this language.',
-    hidden: descriptions.value['es'].length > 0? descriptions.value['es'][descriptions.value['es'].length - 1].flavor_text.replace(pokemonData.name, 'This pokemon').replace(pokemonData.name.toUpperCase(), 'This pokemon').replace(utils.titlecase(pokemonData.name), 'This pokemon'): 'No description available for this language.'
+    default: descriptions.value['es'].length > 0? descriptions.value['es'][descriptions.value['es'].length - 1].flavor_text.replace(pokemonData.name, 'Este pokemon').replace(pokemonData.name.toUpperCase(), 'Este pokemon').replace(utils.titlecase(pokemonData.name), 'Este pokemon')  : 'No description available for this language.',
+    hidden: descriptions.value['es'].length > 0? descriptions.value['es'][descriptions.value['es'].length - 1].flavor_text.replace(pokemonData.name, 'Este pokemon').replace(pokemonData.name.toUpperCase(), 'Este pokemon').replace(utils.titlecase(pokemonData.name), 'Este pokemon'): 'No description available for this language.'
   }
 
   descriptions.value['en'] =  {
@@ -313,16 +321,16 @@ const selectPokemon = (pokemon) => {
     calculateProgress();
   } else{
     mixer.playWrong();
-    mixer.playLose();
     triesAvailable.value--;
+    pokemon.tried = true;
 
     if(triesAvailable.value === 0) {
       loser.value = !winner.value;
       userScore.value = 0;
+      mixer.playLose();
       clearProgress();
     }
   }
-
 }
 
 const goTitleScreen = () => {
@@ -357,13 +365,13 @@ mixer.playMatchGame();
     <SubTitle :text="'Identify the Pokemon!'"></SubTitle>
     <UIButton @click="goTitleScreen()" class="absolute top-10 left-10":icon="'arrow_left'" :text="'Back'" ></UIButton>
 
-    <DifficultyUI  class="absolute bottom-20 right-1.5" :high-contrast="true" :difficulties="['easy', 'medium', 'hard', 'veryhard']" :campaign-progress="campaignProgress" :campaign-set="campaignSet" :difficulty-selected="difficulty" :enable-switch-difficulty="false"></DifficultyUI>
+    <DifficultyUI  class="absolute bottom-20 right-1.5" :high-contrast="true" :difficulties="['easy', 'medium', 'hard', 'veryhard', 'extrahard']" :campaign-progress="campaignProgress" :campaign-set="campaignSet" :difficulty-selected="difficulty" :enable-switch-difficulty="false"></DifficultyUI>
 
-    <ProgressInfo class="absolute bottom-[100px] left-1.5" :triesAvailable="triesAvailable" :userScore="userScore" :showScore="true"></ProgressInfo>
+    <ProgressInfo class="absolute bottom-[250px] left-1.5" :triesAvailable="triesAvailable" :userScore="userScore" :showScore="true"></ProgressInfo>
 
     <div class="flex z-30 justify-center md:gap-x-16 lg:gap-x-20 gap-x-10 items-center flex-wrap">
       <div v-if="!winner && !loser" class=" my-20 text-center flex flex-wrap justify-center items-center" v-for="pokemon of pokemons" >
-        <div class="bg-white border-4 border-amber-200 size-24 blur-md rounded-full"></div>
+        <div class=" border-4 border-amber-200 size-24 blur-md rounded-full" :class="pokemon.tried? 'bg-red-400' : 'bg-white'"></div>
 <!--        <div class="bg-green-950 opacity-50 absolute size-16 blur-md rounded-full"></div>-->
         <img @click="selectPokemon(pokemon)" :data="pokemon.id" class="absolute z-10 animate-scalein img-shadow-retro h-[150px] md:h-[160px] cursor-pointer hover:scale-150 transition" :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`" />
 <!--        <img :data="pokemon.id" class="absolute z-10 animate-scalein h-[100px] cursor-pointer hover:scale-150 transition" :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${pokemon.id}.gif`" />-->

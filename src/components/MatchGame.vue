@@ -44,7 +44,7 @@ const difficulties = {
     matches: 6,
     hideClass: 'hide-dark',
     rangeMin: 700,
-    rangeMax: 1025,
+    rangeMax: 1008,
     hidename: false,
     scoreMultiplier: 3.5,
     timer: 120
@@ -55,7 +55,7 @@ const difficulties = {
     matches: 7,
     hideClass: 'hide-dark',
     rangeMin: 800,
-    rangeMax: 1025,
+    rangeMax: 1008,
     hidename: true,
     scoreMultiplier: 5,
     timer: 60,
@@ -67,7 +67,7 @@ const difficulties = {
     matches: 7,
     hideClass: 'hide-extradark',
     rangeMin: 800,
-    rangeMax: 1025,
+    rangeMax: 1008,
     hidename: true,
     scoreMultiplier: 10,
     timer: 30,
@@ -78,7 +78,7 @@ const pokemons = ref([]);
 const fireworks = ref([]);
 const winner = ref(false);
 const loser = ref(false);
-const difficulty = ref('hard');
+const difficulty = ref('easy');
 const shuffledPokemons = ref([]);
 const triesAvailable = ref(0);
 const userScore = ref(0);
@@ -309,7 +309,13 @@ const init = () => {
 
   do {
     const newPokemonId = utils.getRandomNumber(getDifficulty().rangeMin, getDifficulty().rangeMax);
+
+
     if(!pokemons.value.map(p => p.id).includes(newPokemonId)) {
+
+      console.log(newPokemonId - 1)
+      console.log(pokemonData[newPokemonId - 1])
+
       pokemons.value.push({
         id: newPokemonId,
         shadow: 'shadow-' + utils.getRandomNumber(1, 9),
@@ -363,7 +369,7 @@ interact('.dropzone').dropzone({
   // only accept elements matching this CSS selector
   accept: '.draggable',
   // Require a 75% element overlap for a drop to be possible
-  overlap: 0.55,
+  overlap: 0.25,
 
   // listen for drop related events:
 

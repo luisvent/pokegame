@@ -78,16 +78,16 @@ init();
 <!--  <img class="absolute bottom-0" src="/src/assets/images/bicycle.gif" />-->
 
   <template v-if="enableParticles" v-for="particle of particles">
-    <img class="absolute run-animation" :class="particle.class" :style="`right: ${particle.x}%; top: ${particle.y}%;`" :src="particle.src" />
+    <img class="absolute run-animation pointer-events-none" :class="particle.class" :style="`right: ${particle.x}%; top: ${particle.y}%;`" :src="particle.src" />
   </template>
 
   <template v-if="screen === 'intro'">
-    <img style="transform: rotateY(180deg); filter: grayscale(0.2);" class="absolute bottom-20 left-20 w-50" src="/images/effects/blastoise.gif" />
+    <img style="transform: rotateY(180deg); filter: grayscale(0.2);" class="absolute pointer-events-none bottom-20 left-20 w-50" src="/images/effects/blastoise.gif" />
   </template>
 
   <template v-if="screen === 'matchgame'">
-  <img style="transform: rotateY(180deg);" class="absolute run-animation bottom-2.5 right-0 w-28" src="/images/effects/pika_run.gif" />
-  <img style="transform: rotateY(180deg);" class="absolute bottom-28 left-10 w-20" src="/images/effects/bulba_jump.gif" />
+  <img style="transform: rotateY(180deg);" class="absolute pointer-events-none run-animation bottom-2.5 right-0 w-28" src="/images/effects/pika_run.gif" />
+  <img style="transform: rotateY(180deg);" class="absolute pointer-events-none bottom-28 left-10 w-20" src="/images/effects/bulba_jump.gif" />
 
 </template>
 </template>

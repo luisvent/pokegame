@@ -93,7 +93,7 @@ test();
       Select a game to PLAY!
     </div>
     <div class="flex my-20 relative col-span-2 justify-center items-center">
-      <img class="h-[100px] absolute right-8 -top-[80px]" src="/images/effects/pika_idle.gif" />
+      <img class="h-[100px] pointer-events-none absolute right-8 -top-[80px]" src="/images/effects/pika_idle.gif" />
       <div @click="selectGame(game)" :class="game.enable? 'border-red-400 hover:scale-110 cursor-pointer shadow-retro' : 'border-black'" class="transition relative size-52 text-red-600 text-5xl bg-amber-100 m-4 border-8"  v-for="game of games">
 
           <span v-if="game.enable" class="m-[40px] text-4xl">{{game.name}}</span>
@@ -102,18 +102,18 @@ test();
 
 
         <template v-if="game.key === 'matchgame'" >
-          <img class="h-[100px] absolute right-0 bottom-[0px] " src="/images/bg/poke/poke_bg_8.png" />
-          <img class="h-[130px] absolute right-[-15px] bottom-[10px]" src="/images/effects/amooguss.gif" />
+          <img class="h-[100px] pointer-events-none absolute right-0 bottom-[0px] " src="/images/bg/poke/poke_bg_8.png" />
+          <img class="h-[130px] pointer-events-none absolute right-[-15px] bottom-[10px]" src="/images/effects/amooguss.gif" />
           </template>
 
           <template v-else-if="game.key === 'identifygame'" >
-          <img class="h-[100px] absolute right-0 bottom-[0px] " src="/images/bg/poke/poke_bg_4.png" />
-          <img class="animate-hithere h-[90px] w-[110px] absolute right-[0px] bottom-[10px]" src="/images/effects/pokedex2.png" />
+          <img class="h-[100px] pointer-events-none absolute right-0 bottom-[0px] " src="/images/bg/poke/poke_bg_4.png" />
+          <img class="animate-hithere pointer-events-none h-[90px] w-[110px] absolute right-[0px] bottom-[10px]" src="/images/effects/pokedex2.png" />
           </template>
 
           <template v-else-if="game.key === 'versusgame'" >
-          <img class="h-[100px] absolute right-0 bottom-[0px] " src="/images/bg/poke/poke_bg_2.png" />
-          <img class="animate-shake h-[90px] absolute right-[0px] bottom-[5px]" src="/images/effects/vs.png" />
+          <img class="h-[100px] absolute pointer-events-none right-0 bottom-[0px] " src="/images/bg/poke/poke_bg_2.png" />
+          <img class="animate-shake h-[90px] pointer-events-none absolute right-[0px] bottom-[5px]" src="/images/effects/vs.png" />
           </template>
 
 
@@ -147,12 +147,15 @@ test();
   </div>
 
   <div v-if="welcomeMessage" class="top-0 flex justify-center items-center bg-fixed fixed w-screen h-screen bg-[#164c9582]">
-    <div class="container p-4 flex flex-col gap-4 justify-center items-center h-[300px] w-[650px] ring-8 ring-red-400 relative mx-auto bg-amber-100 ">
+    <div class="container p-4 flex flex-col gap-4 justify-center items-center h-[350px] w-[650px] ring-8 ring-red-400 relative mx-auto bg-amber-100 ">
       <div class="text-6xl text-red-500 font-uround text-shadow-retro">
         WELCOME
       </div>
       <div class="text-center text-black text-2xl">
         Here we have some trivia POKEMON games you can play to test your pokemon knowledge.
+      </div>
+      <div class="text-center text-green-700 text-3xl">
+        Recommended to play on DESKTOP
       </div>
       <div class="text-3xl font-round font-bold text-red-500 text-shadow-small">
         Have FUN!
