@@ -43,7 +43,16 @@ const changeLanguage = (language) => {
 }
 
 const getPokemonDescription = async () => {
-  const pokemonData = await api.getPokemonDescription(pokemons.value[utils.getRandomNumber(0, pokemonCount - 1)].id);
+  let pokemonData = await api.getPokemonDescription(pokemons.value[utils.getRandomNumber(0, pokemonCount - 1)].id);
+
+  if(pokemonData['flavor_text_entries'].length === 0) {
+    pokemonData = await api.getPokemonDescription(pokemons.value[utils.getRandomNumber(0, pokemonCount - 1)].id);
+  }
+
+  if(pokemonData['flavor_text_entries'].length === 0) {
+    pokemonData = await api.getPokemonDescription(pokemons.value[utils.getRandomNumber(0, pokemonCount - 1)].id);
+  }
+
   pokemonTarget.value = pokemonData;
   descriptions.value['es'] = pokemonData['flavor_text_entries'].filter(entry => entry.language.name === 'es');
   descriptions.value['en'] = pokemonData['flavor_text_entries'].filter(entry => entry.language.name === 'en');
@@ -88,11 +97,11 @@ mixer.playMatchGame();
   <div class="flex flex-col justify-center items-center">
 
     <SubTitle :text="'Identify the Pokemon!'"></SubTitle>
-    <div class="flex z-30 justify-center gap-32 items-center">
-      <div v-if="!winner && !loser" class=" my-20 text-center flex justify-center items-center" v-for="pokemon of pokemons" >
+    <div class="flex z-30 justify-center md:gap-16 lg:gap-24 gap-10 items-center">
+      <div v-if="!winner && !loser" class=" my-20 text-center flex flex-wrap justify-center items-center" v-for="pokemon of pokemons" >
         <div class="bg-white border-4 border-amber-200 size-24 blur-md rounded-full"></div>
 <!--        <div class="bg-green-950 opacity-50 absolute size-16 blur-md rounded-full"></div>-->
-        <img @click="selectPokemon(pokemon)" :data="pokemon.id" class="absolute z-10 animate-scalein img-shadow-retro h-[200px] cursor-pointer hover:scale-150 transition" :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`" />
+        <img @click="selectPokemon(pokemon)" :data="pokemon.id" class="absolute z-10 animate-scalein img-shadow-retro h-[150px] md:h-[200px] cursor-pointer hover:scale-150 transition" :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`" />
 <!--        <img :data="pokemon.id" class="absolute z-10 animate-scalein h-[100px] cursor-pointer hover:scale-150 transition" :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${pokemon.id}.gif`" />-->
       </div>
       <div v-else>
@@ -102,13 +111,14 @@ mixer.playMatchGame();
     </div>
 
     <div class="relative scale-75">
-      <img class=" img-shadow-retro h-[600px]" src="/images/pokedex.png" />
+      <img class="img-shadow-retro h-[600px]" src="/images/pokedex.png" />
       <img class="absolute animate-blink top-[58px] left-[52px] h-[50px]" src="/images/effects/pokedex_light.png" />
       <div class="size-60 bg-black absolute top-[180px] left-[85px] shadow-retro"></div>
+      <a target="_blank" :href="`https://www.pokemon.com/us/pokedex/${pokemonTarget.name}`" v-if="winner || loser" class="absolute bg-black top-[120px] py-0 px-3.5 cursor-pointer hover:shadow-retro left-[275px] text-white text-3xl" >MORE</a>
 
-      <img class="size-48 bg-white absolute top-[205px] left-[110px]" :class="winner? 'scale-125' : `${loser? '' : 'animate-blink'} opacity-70`" :src="winner? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemonTarget.id}.png` : '/images/icons/question_color.png'" />
+      <img class="size-48 bg-white absolute top-[205px] left-[110px]" :class="winner? 'scale-125' : `${loser? '' : 'animate-blink'} opacity-70`" :src="winner || loser? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemonTarget.id}.png` : '/images/icons/question_color.png'" />
 
-      <div class="w-[300px] text-2xl text-white absolute text-shadow-small right-[55px] top-[190px]" v-if="descriptions[languageSelected].length > 0">{{descriptions[languageSelected][0]['flavor_text']}}</div>
+      <div class="w-[300px] text-2xl text-white absolute text-shadow-small h-[210px] overflow-y-auto right-[55px] top-[190px]" >{{descriptions[languageSelected].length > 0? descriptions[languageSelected][0]['flavor_text'].replace(pokemonTarget.name, '____') : 'No description available for this language.'}}</div>
       <div @click="changeLanguage('en')" class="text-2xl font-bold absolute right-[330px] top-[427px]" :class="languageSelected === 'en'? 'text-amber-400 text-shadow-small' : 'text-black cursor-pointer'" >En</div>
       <div @click="changeLanguage('es')" class="text-2xl font-bold absolute right-[285px] top-[427px]" :class="languageSelected === 'es'? 'text-amber-400 text-shadow-small' : 'text-black cursor-pointer '"  >Es</div>
       <div v-if="winner || loser" class="flex absolute bottom-[60px] right-[85px]">
