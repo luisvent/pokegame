@@ -25,7 +25,7 @@ const winner = ref(false);
 const loser = ref(false);
 const triesAvailable = ref(0);
 const userScore = ref(0);
-const difficulty = ref('extrahard');
+const difficulty = ref('easy');
 
 const campaignSet = {
   easy: {
