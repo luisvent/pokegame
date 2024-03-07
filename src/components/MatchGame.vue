@@ -417,7 +417,7 @@ interact('.dropzone').dropzone({
   </template>
   <UIButton @click="goTitleScreen()" class="absolute top-10 left-10":icon="'arrow_left'" :text="'Back'" ></UIButton>
 
-  <DifficultyUI :difficulties="['easy', 'medium', 'hard', 'veryhard', 'extrahard']" :campaign-progress="campaignProgress" :campaign-set="campaignSet" :difficulty-selected="difficulty" :enable-switch-difficulty="!campaign" class="absolute top-4 right-1.5"></DifficultyUI>
+  <DifficultyUI :difficulties="['easy', 'medium', 'hard', 'veryhard', 'extrahard']" :campaign-progress="campaignProgress" :campaign-set="campaignSet" :difficulty-selected="difficulty" :enable-switch-difficulty="!campaign" class="absolute top-20 right-1.5"></DifficultyUI>
 
   <ProgressInfo class="absolute top-24 left-1.5" :triesAvailable="triesAvailable" :userScore="userScore" :showScore="campaign"></ProgressInfo>
 

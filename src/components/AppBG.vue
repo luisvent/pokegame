@@ -1,12 +1,14 @@
 <script setup>
 import { ref } from 'vue'
 import utils from '@/lib/utils.js'
+import mixer from '@/lib/mixer.js'
 
 const {screen, enableParticles} = defineProps(['screen', 'enableParticles']);
 const bgsClass = ['bg-bg1-clear', 'bg-bg2-clear', 'bg-bg3-clear', 'bg-bg5', 'bg-bg6', 'bg-bg7'];
 const particlesCount = 16;
 const bgInterval = ref(null);
 const particles = ref([]);
+const sound = ref(true);
 let bgClass= ref('bg-bg4-clear');
 
 const initFloatingParticles = (particleMame, min, max, format, _class) => {
@@ -69,13 +71,24 @@ const init = () => {
   }
 }
 
+const toggleMusic = () => {
+
+  sound.value = !sound.value;
+
+  if(sound.value){
+    mixer.playMusic();
+  } else{
+    mixer.stopMusic();
+  }
+}
+
 init();
 </script>
 
 <template>
   <div :class="bgClass" class="absolute top-0 -z-10 transition-all duration-1000 h-full w-full bg-cover bg-center bg-no-repeat">
   </div>
-<!--  <img class="absolute bottom-0" src="/src/assets/images/bicycle.gif" />-->
+  <img @click="toggleMusic()" class="hover:scale-125 cursor-pointer absolute top-6 right-6 h-[40px]" :src="`/images/effects/${sound? 'sound_on' : 'sound_off'}.png`" />
 
   <template v-if="enableParticles" v-for="particle of particles">
     <img class="absolute run-animation pointer-events-none" :class="particle.class" :style="`right: ${particle.x}%; top: ${particle.y}%;`" :src="particle.src" />

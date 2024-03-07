@@ -6,6 +6,7 @@ let wrong = null;
 let intro = null;
 let click = null;
 let matchgame = null;
+let currentMusic = null;
 
 
 const loadAudio = (src) => {
@@ -51,6 +52,7 @@ const playIntroMusic = () => {
   intro.load();
   intro.play();
   intro.loop = true;
+  currentMusic = 'intro';
 }
 
 const stopIntroMusic = () => {
@@ -62,10 +64,35 @@ const playMatchGame = () => {
   matchgame.load();
   matchgame.play();
   matchgame.loop = true;
+  currentMusic = 'matchgame';
 }
 
 const stopMatchGame = () => {
   matchgame.pause();
 }
 
-export default { playScore, playLose, playWrong, playWin, playIntroMusic, stopIntroMusic, playMatchGame, stopMatchGame, playClick, init }
+const playMusic = () => {
+  if(currentMusic) {
+    if(currentMusic === 'intro') {
+      playIntroMusic();
+    }
+
+    if(currentMusic === 'matchgame') {
+      playMatchGame();
+    }
+  }
+}
+
+const stopMusic = () => {
+  if(currentMusic) {
+    if(currentMusic === 'intro') {
+      stopIntroMusic();
+    }
+
+    if(currentMusic === 'matchgame') {
+      stopMatchGame();
+    }
+  }
+}
+
+export default { playMusic, stopMusic, playScore, playLose, playWrong, playWin, playIntroMusic, stopIntroMusic, playMatchGame, stopMatchGame, playClick, init }
