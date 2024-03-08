@@ -6,6 +6,7 @@ import MatchGame from '@/components/MatchGame.vue'
 import IntroScreen from '@/components/IntroScreen.vue'
 import { ref } from 'vue'
 import IdentifyGame from '@/components/IdentifyGame.vue'
+import BattleGame from '@/components/BattleGame.vue'
 
 const screen = ref('intro');
 const showWelcome = ref(true);
@@ -28,6 +29,8 @@ const loadTitleScreen = () => {
   <IdentifyGame @back="loadTitleScreen" v-if="screen === 'identifygame'" ></IdentifyGame>
   <IntroScreen v-if="screen === 'intro'" :showWelcome="showWelcome" @gameSelected="selectGame"></IntroScreen>
   <MatchGame @back="loadTitleScreen" v-else-if="screen === 'matchgame'" ></MatchGame>
+  <BattleGame v-else-if="screen === 'battlegame'" ></BattleGame>
+
 </template>
 
 <style scoped>

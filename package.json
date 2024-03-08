@@ -12,6 +12,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@midudev/tailwind-animations": "^0.0.7",
     "interactjs": "^1.10.26",
     "pinia": "^2.1.7",
     "vue": "^3.4.15"

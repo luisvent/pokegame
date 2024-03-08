@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import defaultTheme from 'tailwindcss/defaultTheme'
+import animations from '@midudev/tailwind-animations'
 
 export default {
   content: [
@@ -14,15 +15,15 @@ export default {
         center: true
       },
       backgroundImage: {
-        'bg1': "url('/images/bg/bg1.png')",
+        'bg1': "url('/images/bg/bg1.webp')",
         'bg2': "url('/images/bg/bg2.png')",
         'bg3': "url('/images/bg/bg3.png')",
-        'bg4': "url('/images/bg/bg4.jpeg')",
-        'bg5': "url('/images/bg/bg5.png')",
-        'bg6': "url('/images/bg/bg6.png')",
+        'bg4': "url('/images/bg/bg4.webp')",
+        'bg5': "url('/images/bg/bg5.webp')",
+        'bg6': "url('/images/bg/bg6.webp')",
         'bg7': "url('/images/bg/bg7.png')",
         'bg8': "url('/images/bg/bg8.png')",
-        'bg1-clear': "url('/images/bg/bg1_clear.png')",
+        'bg1-clear': "url('/images/bg/bg1_clear.webp')",
         'bg2-clear': "url('/images/bg/bg2_clear.png')",
         'bg3-clear': "url('/images/bg/bg3_clear.png')",
         'bg4-clear': "url('/images/bg/bg4_clear.png')",
@@ -94,6 +95,7 @@ export default {
     }
   },
   plugins: [
+    animations
   ],
 }
 
