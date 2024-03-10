@@ -66,17 +66,17 @@ const selectGame = (game) => {
 
 
         <template v-if="game.key === 'matchgame'" >
-          <img class="h-[100px] pointer-events-none absolute right-0 bottom-[0px] " src="/images/bg/poke/poke_bg_8.png" />
+          <img class="h-[100px] pointer-events-none absolute right-0 bottom-[0px] " src="/images/bg/poke/poke_bg_8.webp" />
           <img class="h-[130px] pointer-events-none absolute right-[-15px] bottom-[10px]" src="/images/effects/amooguss.gif" />
           </template>
 
           <template v-else-if="game.key === 'identifygame'" >
-          <img class="h-[100px] pointer-events-none absolute right-0 bottom-[0px] " src="/images/bg/poke/poke_bg_4.png" />
+          <img class="h-[100px] pointer-events-none absolute right-0 bottom-[0px] " src="/images/bg/poke/poke_bg_4.webp" />
           <img class="animate-hithere pointer-events-none h-[90px] w-[110px] absolute right-[0px] bottom-[10px]" src="/images/effects/pokedex2.png" />
           </template>
 
           <template v-else-if="game.key === 'battlegame'" >
-          <img class="h-[100px] absolute pointer-events-none right-0 bottom-[0px] " src="/images/bg/poke/poke_bg_2.png" />
+          <img class="h-[100px] absolute pointer-events-none right-0 bottom-[0px] " src="/images/bg/poke/poke_bg_2.webp" />
           <img class="animate-shake h-[90px] pointer-events-none absolute right-[0px] bottom-[5px]" src="/images/effects/vs.png" />
           </template>
 
