@@ -3,8 +3,8 @@ import { ref } from 'vue'
 import utils from '@/lib/utils.js'
 import mixer from '@/lib/mixer.js'
 
-const {screen, enableParticles} = defineProps(['screen', 'enableParticles']);
-const bgsClass = ['bg-bg1-clear', 'bg-bg2-clear', 'bg-bg3-clear', 'bg-bg5', 'bg-bg6', 'bg-bg7'];
+const {screen, enableParticles, loopTime} = defineProps(['screen', 'enableParticles', 'loopTime']);
+const bgsClass = ['bg-bg1-clear', 'bg-bg2-clear', 'bg-bg3-clear', 'bg-bg5', 'bg-bg6', 'bg-bg7', 'bg-battle1', 'bg-battle2', 'bg-battle3'];
 const particlesCount = 16;
 const bgInterval = ref(null);
 const particles = ref([]);
@@ -27,7 +27,7 @@ const loopBG = (min, max) => {
   bgClass.value = bgsClass[min];
   bgInterval.value = setInterval(() => {
     bgClass.value = bgsClass[utils.getRandomNumber(min, max)];
-  }, 5000);
+  }, loopTime || 5000);
 }
 
 const initIntro = () => {
@@ -40,6 +40,10 @@ const initMatchGame = () => {
 
 const initIdentifyGame = () => {
   loopBG(3, 5);
+}
+
+const initBattleGame = () => {
+  loopBG(6, 8);
 }
 
 const init = () => {
@@ -59,6 +63,13 @@ const init = () => {
 
       if(enableParticles) {
         initFloatingParticles('cloud', 1, 8, 'png');
+      }
+      break;
+    case 'battlegame':
+      initBattleGame();
+
+      if(enableParticles) {
+        initFloatingParticles('stars', 1, 3, 'gif', 'h-[80px]');
       }
       break;
     case 'identifygame':

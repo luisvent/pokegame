@@ -2,8 +2,6 @@
 import mixer from '@/lib/mixer.js'
 import { ref } from 'vue'
 import SimpleButton from '@/components/SimpleButton.vue'
-import utils from '@/lib/utils.js'
-import api from '@/lib/api.js'
 
 mixer.init()
 const musicPlaying = ref(false)
@@ -20,9 +18,9 @@ const games = [
     enable: true
   },
   {
-    key: 'versusgame',
-    name: 'Coming Soon',
-    enable: false
+    key: 'battlegame',
+    name: 'Battle Game',
+    enable: true
   }
 ]
 const emit = defineEmits(['gameSelected']);
@@ -50,40 +48,6 @@ const selectGame = (game) => {
   }
 }
 
-const test = async () => {
-
-  function clearPokemonData(pokemon) {
-    const pokemonCleared = ref({
-      name: '',
-      stats: {},
-      types: []
-    });
-
-    pokemonCleared.value.types = pokemon['types'].map(t => t.type.name);
-    pokemonCleared.value.name = pokemon.name;
-    pokemon['stats'].forEach(s => {
-      pokemonCleared.value.stats[s.stat.name] = s['base_stat']
-    })
-
-    return pokemonCleared.value;
-  }
-
-  const pokemon1Id = utils.getRandomNumber(1, 1025);
-  const pokemon2Id = utils.getRandomNumber(1, 1025);
-
-  const [pokemon1, pokemon2] = await Promise.all([
-    api.getPokemonInfo(pokemon1Id),
-    api.getPokemonInfo(pokemon2Id),
-  ]);
-
-  console.log(pokemon1.name, clearPokemonData(pokemon1))
-  console.log(pokemon2.name, clearPokemonData(pokemon2))
-
-  console.log(utils.vs2(clearPokemonData(pokemon1), clearPokemonData(pokemon2)))
-  console.log(utils.vs2(clearPokemonData(pokemon2), clearPokemonData(pokemon1)))
-}
-
-test();
 </script>
 
 <template>
@@ -93,10 +57,10 @@ test();
       Select a game to PLAY!
     </div>
     <div class="flex my-20 relative col-span-2 justify-center items-center">
-      <img class="h-[100px] pointer-events-none absolute right-8 -top-[80px]" src="/images/effects/pika_idle.gif" />
+      <img class="h-[100px] pointer-events-none absolute right-8 -top-[80px] " src="/images/effects/pika_idle.gif" />
       <div @click="selectGame(game)" :class="game.enable? 'border-red-400 hover:scale-110 cursor-pointer shadow-retro' : 'border-black'" class="transition relative size-52 text-red-600 text-5xl bg-amber-100 m-4 border-8"  v-for="game of games">
 
-          <span v-if="game.enable" class="m-[40px] text-4xl">{{game.name}}</span>
+          <span v-if="game.enable" class="m-[40px] font-bold text-4xl text-shadow-small">{{game.name}}</span>
           <span v-else class="m-[40px] text-black">Coming Soon</span>
 
 
@@ -111,7 +75,7 @@ test();
           <img class="animate-hithere pointer-events-none h-[90px] w-[110px] absolute right-[0px] bottom-[10px]" src="/images/effects/pokedex2.png" />
           </template>
 
-          <template v-else-if="game.key === 'versusgame'" >
+          <template v-else-if="game.key === 'battlegame'" >
           <img class="h-[100px] absolute pointer-events-none right-0 bottom-[0px] " src="/images/bg/poke/poke_bg_2.png" />
           <img class="animate-shake h-[90px] pointer-events-none absolute right-[0px] bottom-[5px]" src="/images/effects/vs.png" />
           </template>
@@ -122,7 +86,7 @@ test();
 
     <div class="text-4xl flex flex-col justify-center items-center text-shadow-small font-round text-red-500">
       <span class="my-3.5" >CREDITS</span>
-      <div class="text-amber-400 flex gap-4 flex-wrap justify-center items-center text-2xl">
+      <div class="text-amber-400 tracking-wider flex gap-4 gap-x-8 flex-wrap justify-center mx-48 items-center text-2xl">
         <span>Giphy</span>
         <span>DevianArt</span>
         <span>Flaticon</span>
@@ -130,8 +94,18 @@ test();
         <span>Pixabay</span>
         <span>Gifer</span>
         <span>Dribble</span>
+        <span>khinsider</span>
         <span>Fintaman</span>
         <span>rare-gallery</span>
+        <span>@WndlIght</span>
+        <span>artstation</span>
+        <span>imgur</span>
+        <span>miguelnero</span>
+        <span>furbooru</span>
+        <span>wifflegif</span>
+        <br>
+        <br>
+        <span>Pokémon and Pokémon character names are trademarks of Nintendo.</span>
       </div>
     </div>
 
@@ -142,6 +116,7 @@ test();
     <span class="my-3.5" >CREATED BY</span>
     <div class="text-amber-400 flex gap-4 justify-center items-center text-3xl">
       <span>Luis Ventura</span>
+      <a class="hover:scale-125 transition" href="https://github.com/luisvent"><img class="h-[25px]" src="/images/icons/github_2.png" /></a>
       <a class="hover:scale-125 transition" href="https://linkedin.com/in/luisvent"><img class="h-[30px]" src="/images/icons/linkedin.png" /></a>
     </div>
   </div>

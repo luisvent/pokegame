@@ -23,6 +23,9 @@ export default {
         'bg6': "url('/images/bg/bg6.webp')",
         'bg7': "url('/images/bg/bg7.png')",
         'bg8': "url('/images/bg/bg8.png')",
+        'battle1': "url('/images/bg/bg_battle1.gif')",
+        'battle2': "url('/images/bg/bg_battle2.gif')",
+        'battle3': "url('/images/bg/bg_battle3.gif')",
         'bg1-clear': "url('/images/bg/bg1_clear.webp')",
         'bg2-clear': "url('/images/bg/bg2_clear.png')",
         'bg3-clear': "url('/images/bg/bg3_clear.png')",
@@ -30,8 +33,8 @@ export default {
         'bg5-clear': "url('/images/bg/intro_bg.jpg')",
       },
       fontFamily: {
-        round: ["Base Round", ...defaultTheme.fontFamily.sans],
-        uround: ["Base Ultra Round", ...defaultTheme.fontFamily.sans],
+        round: ["Base Round", "Ark", ...defaultTheme.fontFamily.sans],
+        uround: ["Base Ultra Round", "Ark", ...defaultTheme.fontFamily.sans],
       },
       boxShadow: {
         'retro': '3px 3px 0px black',

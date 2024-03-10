@@ -73,7 +73,7 @@ const vs1 = (pokemon1, pokemon2) => {
   return winProb;
 }
 
-const vs2 = (pokemon1, pokemon2) => {
+const calcWinProbability = (pokemon1, pokemon2) => {
   function calculateTypeEffectiveness(attackingTypes, defendingTypes) {
     let effectiveness = 1;
     for (const attackingType of attackingTypes) {
@@ -118,7 +118,7 @@ const vs2 = (pokemon1, pokemon2) => {
     message = `has a low chance of winning (${(winProbability * 100).toFixed(0)}%) against ${pokemon2.name} because ${strengthDifference.length > 0 ? strengthDifference + ' ' : ''}${typeAdvantage.length > 0 ? typeAdvantage + ' ' : ''}${strengthDifference.length > 0 && typeAdvantage.length > 0 ? 'and ' : ''}${strengthDifference.length === 0 && typeAdvantage.length === 0 ? 'its overall strength and type effectiveness give it a significant disadvantage against ' + pokemon2.name : ''}. With these factors working against it, ${pokemon1.name} is unlikely to overcome ${pokemon2.name}'s advantages and will likely be defeated.`;
   }
 
-  return { probability: winProbability, message: `${pokemon1.name} ${message}` };
+  return { pokemon: pokemon1, probability: winProbability, message: `${pokemon1.name} ${message}` };
 }
 
 const downloadObject = (storageObj) => {
@@ -199,5 +199,4 @@ export default {
   replaceRandomStringChar,
   getSimilarPokemons,
   titlecase,
-  vs1,
-  vs2 }
+  calcWinProbability }

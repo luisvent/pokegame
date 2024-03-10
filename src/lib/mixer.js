@@ -6,6 +6,8 @@ let wrong = null;
 let intro = null;
 let click = null;
 let matchgame = null;
+let battlegame = null;
+let identifygame = null;
 let currentMusic = null;
 
 
@@ -21,6 +23,8 @@ const init = () => {
   win = loadAudio('/sounds/fx/win.ogg');
   intro = loadAudio('/sounds/music/Fallarbor_Town.mp3');
   matchgame = loadAudio('/sounds/music/pikachu_beach.ogg');
+  battlegame = loadAudio('/sounds/music/classic_battle.ogg');
+  identifygame = loadAudio('/sounds/music/pokemon_jump.ogg');
 }
 
 const playScore = async () => {
@@ -55,9 +59,23 @@ const playIntroMusic = () => {
   currentMusic = 'intro';
 }
 
+const playBattleGameMusic = () => {
+  battlegame.load();
+  battlegame.play();
+  battlegame.loop = true;
+  currentMusic = 'battlegame';
+}
+
 const stopIntroMusic = () => {
-  console.log(intro);
   intro.pause();
+}
+
+const stopIdentifyMusic = () => {
+  identifygame.pause();
+}
+
+const stopBattleGameMusic = () => {
+  battlegame.pause();
 }
 
 const playMatchGame = () => {
@@ -65,6 +83,13 @@ const playMatchGame = () => {
   matchgame.play();
   matchgame.loop = true;
   currentMusic = 'matchgame';
+}
+
+const playIdentifyGame = () => {
+  identifygame.load();
+  identifygame.play();
+  identifygame.loop = true;
+  currentMusic = 'identifygame';
 }
 
 const stopMatchGame = () => {
@@ -80,6 +105,14 @@ const playMusic = () => {
     if(currentMusic === 'matchgame') {
       playMatchGame();
     }
+
+    if(currentMusic === 'identifygame') {
+      playIdentifyGame();
+    }
+
+    if(currentMusic === 'battlegame') {
+      playBattleGameMusic();
+    }
   }
 }
 
@@ -92,7 +125,15 @@ const stopMusic = () => {
     if(currentMusic === 'matchgame') {
       stopMatchGame();
     }
+
+    if(currentMusic === 'identifygame') {
+      stopIdentifyMusic();
+    }
+
+    if(currentMusic === 'battlegame') {
+      stopBattleGameMusic();
+    }
   }
 }
 
-export default { playMusic, stopMusic, playScore, playLose, playWrong, playWin, playIntroMusic, stopIntroMusic, playMatchGame, stopMatchGame, playClick, init }
+export default { stopIdentifyMusic, playIdentifyGame, playBattleGameMusic, stopBattleGameMusic, playMusic, stopMusic, playScore, playLose, playWrong, playWin, playIntroMusic, stopIntroMusic, playMatchGame, stopMatchGame, playClick, init }

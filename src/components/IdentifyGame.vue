@@ -334,7 +334,7 @@ const selectPokemon = (pokemon) => {
 }
 
 const goTitleScreen = () => {
-  mixer.stopMatchGame();
+  mixer.stopIdentifyMusic();
   emit('back');
 }
 
@@ -356,7 +356,7 @@ const init = () => {
 }
 
 init();
-mixer.playMatchGame();
+mixer.playIdentifyGame();
 </script>
 
 <template>
@@ -372,9 +372,7 @@ mixer.playMatchGame();
     <div class="flex z-30 justify-center md:gap-x-16 lg:gap-x-20 gap-x-10 items-center flex-wrap">
       <div v-if="!winner && !loser" class=" my-20 text-center flex flex-wrap justify-center items-center" v-for="pokemon of pokemons" >
         <div class=" border-4 border-amber-200 size-24 blur-md rounded-full" :class="pokemon.tried? 'bg-red-400' : 'bg-white'"></div>
-<!--        <div class="bg-green-950 opacity-50 absolute size-16 blur-md rounded-full"></div>-->
         <img @click="selectPokemon(pokemon)" :data="pokemon.id" class="absolute z-10 animate-scalein img-shadow-retro h-[150px] md:h-[160px] cursor-pointer hover:scale-150 transition" :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`" />
-<!--        <img :data="pokemon.id" class="absolute z-10 animate-scalein h-[100px] cursor-pointer hover:scale-150 transition" :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${pokemon.id}.gif`" />-->
       </div>
       <div v-else>
         <h1 v-if="winner" class="animate-bounce text-amber-500 text-8xl font-uround uppercase text-shadow-retro">winner!</h1>
