@@ -21,7 +21,7 @@ const init = () => {
   wrong = loadAudio('/sounds/fx/lose.ogg');
   click = loadAudio('/sounds/fx/click.ogg');
   win = loadAudio('/sounds/fx/win.ogg');
-  intro = loadAudio('/sounds/music/Fallarbor_Town.mp3');
+  intro = loadAudio('/sounds/music/fallarbor_town.ogg');
   matchgame = loadAudio('/sounds/music/pikachu_beach.ogg');
   battlegame = loadAudio('/sounds/music/classic_battle.ogg');
   identifygame = loadAudio('/sounds/music/pokemon_jump.ogg');

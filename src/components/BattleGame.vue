@@ -103,7 +103,7 @@ init();
       </div>
 
       <div class="size-4">
-        <img src="/images/effects/latios.gif" class="absolute mx-40 h-56 object-contain" />
+        <img src="/images/effects/latios2.gif" class="absolute mx-40 h-56 object-contain" />
       </div>
 
       <div class="size-4">
